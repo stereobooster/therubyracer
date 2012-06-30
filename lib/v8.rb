@@ -1,5 +1,11 @@
 require "v8/version"
 
+begin
+  require 'libv8'
+  ENV['PATH'] += File::PATH_SEPARATOR + Libv8.libv8_source_path
+rescue LoadError
+end
+
 require 'ref'
 require 'v8/init'
 require 'v8/util/weakcell'
