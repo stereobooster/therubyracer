@@ -10,7 +10,6 @@ def mingw?
 end
 
 have_library('winmm') if mingw?
-# have_library('ws2_32') if mingw?
 have_library('pthread')
 
 have_library('objc') if darwin?
@@ -19,14 +18,7 @@ $CPPFLAGS += " -g" unless $CPPFLAGS.split.include? "-g"
 $CPPFLAGS += " -rdynamic" unless $CPPFLAGS.split.include? "-rdynamic" or mingw?
 $CPPFLAGS += " -fPIC" unless $CPPFLAGS.split.include? "-rdynamic" or darwin? or mingw?
 
-if mingw?
-  # -Woverloaded-virtual -pedantic
-  $CPPFLAGS += " -Wnon-virtual-dtor -fno-rtti -fno-exceptions -Werror -W -Wno-pedantic-ms-format -fomit-frame-pointer -fdata-sections -ffunction-sections -fno-strict-aliasing"
-  $CPPFLAGS += " -m32 -DWIN32 -DV8_TARGET_ARCH_IA32 -DENABLE_DEBUGGER_SUPPORT"
-  $LDFLAGS  += " -m32"
-end
-
-CONFIG['LDSHARED'] = '$(CXX) -shared' unless darwin?
+CONFIG['LDSHARED'] = '$(CXX) -shared' unless darwin? or mingw?
 if CONFIG['warnflags']
   CONFIG['warnflags'].gsub!('-Wdeclaration-after-statement', '')
   CONFIG['warnflags'].gsub!('-Wimplicit-function-declaration', '')
