@@ -8,7 +8,7 @@ gem "rspec", "~> 2.0"
 gem "rake-compiler"
 
 group :libv8 do
-  gem 'libv8', "~> 3.11.8"
+  gem 'libv8-st', "~> 3.11.8"
 end
 
 

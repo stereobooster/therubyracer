@@ -4,7 +4,7 @@ LIBV8_COMPATIBILITY = '~> 3.11.8'
 
 def have_rubygem_libv8?
   require 'rubygems'
-  gem 'libv8', LIBV8_COMPATIBILITY
+  gem 'libv8-st', LIBV8_COMPATIBILITY
   require 'libv8'
   return true
 rescue Gem::LoadError
